@@ -1,15 +1,28 @@
 import React from 'react';
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery } from '@apollo/client';
 
 const client = new ApolloClient({
     uri: 'https://localhost:4000/',
     cache: new InMemoryCache()
 });
 
+const GET_MESSAGES = gql`
+query {
+  messages {
+    id
+    content
+    user
+  }
+}`;
+
+const Messages = ({ user }) => {
+    const { data } = useQuery(GET_MESSAGES);
+}
+
 const Chat = () => {
     return (
-        <div>I'm a chat window</div>
+        <div><Messages user="Jack" /></div>
     )
 }
 
