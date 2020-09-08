@@ -18,6 +18,10 @@ query {
 
 const Messages = ({ user }) => {
     const { data } = useQuery(GET_MESSAGES);
+    if (!data) {
+        return null;
+    }
+    return JSON.stringify(data);
 }
 
 const Chat = () => {
